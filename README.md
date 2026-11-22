@@ -12,8 +12,15 @@ gauntlet through the env at `MAKEFUN_ENV_URL`.
 Design: 120-square board kept from the side-to-move point of view (the
 board is rank-flipped and case-swapped after every move), full legal move
 generation (castling, en passant, promotions), incremental
-material + piece-square evaluation, negamax with alpha-beta pruning,
-iterative deepening under a fixed node budget (never a clock, so replays
-match), a transposition table, null-move pruning, check extensions, and a
-quiescence search over captures and check evasions. Repetition and the
-fifty-move rule score as draws inside the search.
+material + piece-square evaluation with a bishop-pair bonus, negamax with
+alpha-beta pruning, iterative deepening under a fixed node budget (never
+a clock, so replays match), a transposition table, null-move pruning,
+late-move reduction for quiet moves, check extensions, and a quiescence
+search over captures and check evasions. Repetition and the fifty-move
+rule score as draws inside the search.
+
+Development: the engine was revised over recorded sessions, driven by
+local tests (perft, incremental-eval consistency, determinism checks and
+equal-budget self-play matches). Late-move reduction and the bishop-pair
+term were each added only after the revised engine outscored the previous
+version in head-to-head matches at the same 60,000-node budget.
